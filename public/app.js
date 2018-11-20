@@ -34,6 +34,16 @@ new Vue({
             this.score()
         },
 
+        addThisJoker: function (joker) {
+            if(joker == '') {
+                Materialize.toast("Add a joker!", 2000)
+                return
+            }
+            fetch(`/add/${joker}`)
+            //this.newJoker = ''; // Reset field
+            this.score()
+        },
+
         score: function() {
             this.jokersPlace = ''
             fetch(`/score`)
@@ -58,7 +68,7 @@ new Vue({
         },
 
         parseJoker: function(joker) {
-            this.jokersPlace += `<a href="#!" class="collection-item"><span class="badge">${joker.jokes}</span>${emojione.toImage(joker.name)}</a>`
+            this.jokersPlace += `<a href="#!" class="collection-item"><a class="waves-effect waves-teal btn-flat" @click="addThisJoker(${joker.name})">+</a><span class="badge">${joker.jokes}</span>${emojione.toImage(joker.name)}</a>`
         }
     }
 });
