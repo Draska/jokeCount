@@ -57,7 +57,7 @@ func (h Handler) addMany(w http.ResponseWriter, r *http.Request) {
 		if err = h.db.Where("name=?", joker.Name).First(&jk).Error; gorm.IsRecordNotFoundError(err) {
 			h.db.Create(&joker)
 		} else {
-			jk.Jokes = joker.Jokes
+			jk.Jokes += joker.Jokes
 			h.db.Save(&jk)
 		}
 	}
