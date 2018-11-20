@@ -37,6 +37,7 @@ func main() {
 	// create the login route based on the api-attempt!
 	r.HandleFunc("/add/{joker}", h.addJoker).Methods("GET")
 	r.HandleFunc("/joke/{joker}", h.addToJoker).Methods("GET")
+	r.HandleFunc("/kill/{joker}", h.kill).Methods("GET")
 	r.HandleFunc("/score", h.score).Methods("GET")
 	r.HandleFunc("/score", h.addMany).Methods("POST")
 	fs := http.FileServer(http.Dir("./public"))
@@ -83,6 +84,17 @@ func (h Handler) addJoker(w http.ResponseWriter, r *http.Request) {
 	joker := Joker{Name: name, Jokes: 0}
 	h.db.Create(&joker)
 	err := json.NewEncoder(w).Encode(joker)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func (h Handler) kill(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	name := vars["joker"]
+	h.db.Where("name=?", name).Delete(Joker{})
+	err := json.NewEncoder(w).Encode("deleted " + name)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
