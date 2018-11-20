@@ -60,6 +60,7 @@ new Vue({
                     this.jokers.forEach(joker => {
                         this.parseJoker(joker);
                     });
+                    location.reload()
                 })
             })
             .catch(err => {
