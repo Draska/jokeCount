@@ -42,6 +42,7 @@ new Vue({
             fetch(`/joke/${joker}`)
             //this.newJoker = ''; // Reset field
             this.score()
+            location.reload()
         },
 
         score: function() {
@@ -60,7 +61,6 @@ new Vue({
                     this.jokers.forEach(joker => {
                         this.parseJoker(joker);
                     });
-                    location.reload()
                 })
             })
             .catch(err => {
