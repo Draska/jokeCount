@@ -58,7 +58,7 @@ new Vue({
         },
 
         parseJoker: function(joker) {
-            this.jokersPlace += `<a href="#!" class="collection-item"><span class="badge">${joker.jokes}</span>${joker.name}</a>`
+            this.jokersPlace += `<a href="#!" class="collection-item"><span class="badge">${joker.jokes}</span>${emojione.toImage(joker.name)}</a>`
         }
     }
 });
