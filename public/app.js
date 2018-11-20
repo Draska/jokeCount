@@ -57,9 +57,9 @@ new Vue({
                 .then( data => {
                     console.log(data);
                     this.jokers = data;
-                    /* this.jokers.forEach(joker => {
+                    this.jokers.forEach(joker => {
                         this.parseJoker(joker);
-                    }); */
+                    });
                 })
             })
             .catch(err => {
@@ -68,7 +68,7 @@ new Vue({
         },
 
         parseJoker: function(joker) {
-            this.jokersPlace += `<a href="#!" class="collection-item"><span class="badge"><a class="waves-effect waves-teal btn-flat btn-small">+</a>${joker.jokes}</span>${emojione.toImage(joker.name)}</a>`
+            this.jokersPlace += `<a href="#!" class="collection-item"><span class="badge"><a class="waves-effect waves-teal btn-flat btn-small" onclick="addThisJoke(${joker.name})">+</a>${joker.jokes}</span>${emojione.toImage(joker.name)}</a>`
         }
     }
 });
