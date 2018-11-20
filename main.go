@@ -22,7 +22,7 @@ type Handler struct {
 }
 
 func main() {
-	port := os.Getenv("PORT")
+	port := ":" + os.Getenv("PORT")
 	dbURL := os.Getenv("DATABASE_URL")
 	var h Handler
 	// db, err := gorm.Open("sqlite3", "jokers.db")
